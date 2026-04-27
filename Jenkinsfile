@@ -1,0 +1,56 @@
+@Library(['dockerHelpers', 'testing']) _
+pipeline {
+	agent any
+
+	environment {
+		// Docker repositories
+		TEST_REGISTRY = 'rg.fr-par.scw.cloud/testing-images'
+
+		// Images
+		PHP_TEST_IMAGE = 'php:8.5'
+
+		// Workspace directory inside container
+		CONTAINER_WORKSPACE = '/workspace'
+	}
+
+	stages {
+		stage('Docker Login') {
+			steps {
+				script {
+					withCredentials([string(credentialsId: 'scaleway_secret_key', variable: 'SECRET')]) {
+						dockerRegistryLogin(
+							registryUrl: TEST_REGISTRY,
+							password: env.SECRET
+						)
+					}
+				}
+			}
+		}
+
+		stage('Pull Test Image') {
+			steps {
+				sh "docker pull ${TEST_REGISTRY}/${PHP_TEST_IMAGE}"
+			}
+		}
+
+		stage('Testing') {
+			steps {
+				script {
+					fullPhpTest(
+						image: "${TEST_REGISTRY}/${PHP_TEST_IMAGE}",
+						runInstall: true,
+						phpstanCommand: './vendor/bin/phpstan analyse --memory-limit=1G',
+						csCommand: './vendor/bin/pint --test',
+						testCommand: './vendor/bin/phpunit'
+					)
+				}
+			}
+		}
+
+		stage('Trigger Satis rebuild') {
+			steps {
+				build job: 'internal/eSoul Internal/packages-repository/master', wait: false
+			}
+		}
+	}
+}

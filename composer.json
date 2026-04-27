@@ -1,0 +1,40 @@
+{
+  "name": "esoul/cqrs",
+  "version": "1.0.0",
+  "description": "Simple CQRS implementation.",
+  "type": "library",
+  "license": "gpl-2.0-or-later",
+  "authors": [
+    {
+      "name": "Tomáš Vojík",
+      "email": "vojik@esoul.cz"
+    }
+  ],
+  "require": {
+    "php": ">=8.5"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2",
+    "laravel/pint": "^1.13",
+    "phpunit/phpunit": "^13.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Esoul\\Cqrs\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "phpstan": "./vendor/bin/phpstan",
+    "phpcs": "./vendor/bin/pint --test",
+    "cs": "./vendor/bin/pint --test",
+    "phpcbf": "./vendor/bin/pint",
+    "cbf": "./vendor/bin/pint"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
