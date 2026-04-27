@@ -1,6 +1,5 @@
 {
   "name": "esoul/cqrs",
-  "version": "1.0.0",
   "description": "Simple CQRS implementation.",
   "type": "library",
   "license": "gpl-2.0-or-later",
