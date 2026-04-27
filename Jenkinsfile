@@ -33,6 +33,21 @@ pipeline {
 			}
 		}
 
+		stage('Prepare Dependencies') {
+			steps {
+				script {
+					// Need to update to refresh the lock file as it's not committed to the repository
+					sh """
+						docker run --rm \
+							-v \$(pwd):${CONTAINER_WORKSPACE} \
+							-w ${CONTAINER_WORKSPACE} \
+							${TEST_REGISTRY}/${PHP_TEST_IMAGE} \
+							sh -c 'composer update && composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader'
+					"""
+				}
+			}
+		}
+
 		stage('Testing') {
 			steps {
 				script {
