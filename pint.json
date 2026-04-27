@@ -88,6 +88,6 @@
   "exclude": [
     "vendor",
     "storage",
-    "bootstrap/cache"
+    "cache"
   ]
 }
