@@ -1,4 +1,4 @@
-# eSoul CQRS
+# esoul-cz/cqrs
 
 Minimal CQRS library for PHP 8.5+ with:
 
@@ -16,20 +16,13 @@ The package stays small on purpose. It does not ship with a container integratio
 
 ## Installation
 
-If you install from the private package registry, add the repository to `composer.json`:
+Install from Packagist:
 
-```json
-{
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.esoul.cz"
-    }
-  ]
-}
+```bash
+composer require esoul-cz/cqrs
 ```
 
-Or install from GitHub:
+If you need to install directly from GitHub instead, add the repository to `composer.json`:
 
 ```json
 {
@@ -40,12 +33,6 @@ Or install from GitHub:
     }
   ]
 }
-```
-
-Then require the package:
-
-```bash
-composer require esoul/cqrs
 ```
 
 ## Concepts
