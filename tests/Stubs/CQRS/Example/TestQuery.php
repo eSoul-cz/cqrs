@@ -13,8 +13,7 @@ final class TestQuery implements QueryInterface
 {
     public private(set) ?int $filter1 = null;
 
-    public function filter1(int $filter1): self
-    {
+    public function filter1(int $filter1): self {
         $this->filter1 = $filter1;
 
         return $this;

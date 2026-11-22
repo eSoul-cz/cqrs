@@ -16,7 +16,8 @@ final readonly class HandlesCommand
      * @param  class-string<CommandInterface<TCommandResult>>  $commandClass
      */
     public function __construct(
-        public string $commandClass
-    ) {}
+        public string $commandClass,
+    ) {
+    }
 
 }

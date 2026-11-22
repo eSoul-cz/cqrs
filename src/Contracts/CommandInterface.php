@@ -9,4 +9,6 @@ namespace Esoul\Cqrs\Contracts;
  *
  * @template TResult of mixed Return value of the command
  */
-interface CommandInterface {}
+interface CommandInterface
+{
+}

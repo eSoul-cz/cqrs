@@ -22,15 +22,15 @@ final class CommandBus implements CommandBusInterface
 
     public function __construct(
         private readonly HandlerFactoryInterface $handlerFactory,
-    ) {}
+    ) {
+    }
 
     /**
      * {@inheritDoc}
      */
-    public function dispatch(CommandInterface $command): mixed
-    {
+    public function dispatch(CommandInterface $command): mixed {
         // Check if handler is registered for the command
-        if (!isset($this->handlers[$command::class])) {
+        if ( ! isset($this->handlers[$command::class])) {
             throw new RuntimeException('No handler registered for command ' . $command::class);
         }
 
@@ -38,7 +38,7 @@ final class CommandBus implements CommandBusInterface
         $handlerClass = $this->handlers[$command::class];
         $handler = $this->handlerFactory->instantiate($handlerClass);
         /** @phpstan-ignore instanceof.alwaysTrue */
-        if (!$handler instanceof CommandHandlerInterface) {
+        if ( ! $handler instanceof CommandHandlerInterface) {
             throw new RuntimeException("Handler class {$handlerClass} does not implement CommandHandlerInterface");
         }
 
@@ -48,8 +48,7 @@ final class CommandBus implements CommandBusInterface
     /**
      * {@inheritDoc}
      */
-    public function registerHandler(string $commandClass, string $handlerClass): void
-    {
+    public function registerHandler(string $commandClass, string $handlerClass): void {
         $this->handlers[$commandClass] = $handlerClass;
     }
 
@@ -58,8 +57,7 @@ final class CommandBus implements CommandBusInterface
      *
      * @throws ReflectionException
      */
-    public function discoverHandlers(string $directory, string $rootNamespace = '\\App', bool $cache = true): array
-    {
+    public function discoverHandlers(string $directory, string $rootNamespace = '\\App', bool $cache = true): array {
         // Scan for command handlers using the HandlesCommands attribute and register them with the command bus
         /** @var class-string<CommandHandlerInterface>[] $handlers */
         $handlers = new Discovery($directory, $rootNamespace)

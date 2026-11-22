@@ -17,8 +17,7 @@ use Tests\Stubs\CQRS\TestingQueryHandler;
 
 class QueryBusTest extends TestCase
 {
-    public function test_handler_discovery(): void
-    {
+    public function test_handler_discovery(): void {
         $queryBus = new QueryBus(new SimpleHandlerFactory());
 
         $handlers = $queryBus->discoverHandlers(dirname(__DIR__) . '/Stubs', '\\Tests\\Stubs', false);
@@ -28,8 +27,7 @@ class QueryBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_manual_register(): void
-    {
+    public function test_dispatch_manual_register(): void {
         $queryBus = new QueryBus(new SimpleHandlerFactory());
         $queryBus->registerHandler(TestingQuery::class, TestingQueryHandler::class);
 
@@ -41,8 +39,7 @@ class QueryBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_without_handler(): void
-    {
+    public function test_dispatch_without_handler(): void {
         $queryBus = new QueryBus(new SimpleHandlerFactory());
 
         $this->expectException(RuntimeException::class);
@@ -51,8 +48,7 @@ class QueryBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_with_invalid_handler(): void
-    {
+    public function test_dispatch_with_invalid_handler(): void {
         $queryBus = new QueryBus(new SimpleHandlerFactory());
         /** @phpstan-ignore argument.type */
         $queryBus->registerHandler(TestingQuery::class, stdClass::class);

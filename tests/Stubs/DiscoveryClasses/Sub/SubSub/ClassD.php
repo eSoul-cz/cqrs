@@ -7,4 +7,6 @@ namespace Tests\Stubs\DiscoveryClasses\Sub\SubSub;
 use AllowDynamicProperties;
 
 #[AllowDynamicProperties]
-class ClassD {}
+class ClassD
+{
+}

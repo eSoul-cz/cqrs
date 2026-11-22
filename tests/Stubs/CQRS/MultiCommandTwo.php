@@ -9,4 +9,6 @@ use Esoul\Cqrs\Contracts\CommandInterface;
 /**
  * @implements CommandInterface<string>
  */
-class MultiCommandTwo implements CommandInterface {}
+class MultiCommandTwo implements CommandInterface
+{
+}

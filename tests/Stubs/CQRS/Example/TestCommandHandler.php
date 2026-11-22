@@ -14,8 +14,7 @@ final class TestCommandHandler implements CommandHandlerInterface
     /**
      * @param  TestCommand  $command
      */
-    public function handle(CommandInterface $command): string
-    {
+    public function handle(CommandInterface $command): string {
         return 'Handled command with property: ' . $command->property;
     }
 }

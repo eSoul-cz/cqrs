@@ -12,8 +12,7 @@ class TestingQueryHandler implements QueryHandlerInterface
     /**
      * @param  TestingQuery  $query
      */
-    public function handle(QueryInterface $query): string
-    {
+    public function handle(QueryInterface $query): string {
         return 'Handled!';
     }
 }

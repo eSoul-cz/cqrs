@@ -48,16 +48,15 @@ final class Discovery
      *
      * @param  non-empty-string|null  $cacheDirectory
      */
-    public static function setCacheDirectory(?string $cacheDirectory): void
-    {
-        if (is_string($cacheDirectory) && !is_dir($cacheDirectory) && !mkdir($cacheDirectory, 0755, true) && !is_dir($cacheDirectory)) {
+    public static function setCacheDirectory(?string $cacheDirectory): void {
+        if (is_string($cacheDirectory) && ! is_dir($cacheDirectory) && ! mkdir($cacheDirectory, 0755, true) && ! is_dir($cacheDirectory)) {
             throw new RuntimeException(sprintf('Failed to create "%s" was not created', $cacheDirectory));
         }
 
         if ($cacheDirectory !== null) {
             // Ensure cache directory path does not end with a slash
             $cacheDirectory = rtrim($cacheDirectory, "\\/ \n\r\t\v\0");
-            assert(!empty($cacheDirectory), 'Cache directory cannot be empty');
+            assert( ! empty($cacheDirectory), 'Cache directory cannot be empty');
         }
 
         self::$cacheDirectory = $cacheDirectory;
@@ -69,8 +68,7 @@ final class Discovery
      * @param  class-string  $attribute
      * @return $this
      */
-    public function withAttribute(string $attribute): Discovery
-    {
+    public function withAttribute(string $attribute): Discovery {
         $this->attributes[] = $attribute;
 
         return $this;
@@ -82,8 +80,7 @@ final class Discovery
      * @param  class-string  $interface
      * @return $this
      */
-    public function implements(string $interface): Discovery
-    {
+    public function implements(string $interface): Discovery {
         $this->interfaces[] = $interface;
 
         return $this;
@@ -95,8 +92,7 @@ final class Discovery
      *
      * @throws ReflectionException
      */
-    public function get(?string $cacheKey = null): array
-    {
+    public function get(?string $cacheKey = null): array {
         ['time' => $time, 'classes' => $classes] = $this->findClasses($this->directory);
         $cacheFile = null;
         if ($cacheKey !== null && self::$cacheDirectory !== null) {
@@ -120,12 +116,12 @@ final class Discovery
                 }
 
                 // Filter interfaces
-                if (array_any($this->interfaces, fn ($interface) => !$reflection->implementsInterface($interface))) {
+                if (array_any($this->interfaces, fn ($interface) => ! $reflection->implementsInterface($interface))) {
                     return false;
                 }
 
                 return true;
-            })
+            }),
         );
 
         if ($cacheFile !== null) {
@@ -140,14 +136,13 @@ final class Discovery
      * @param  non-empty-string  $directory
      * @return array{time: int, classes: class-string[]}
      */
-    private function findClasses(string $directory): array
-    {
+    private function findClasses(string $directory): array {
         $directoryIterator = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
         $iteratorIterator = new RecursiveIteratorIterator($directoryIterator);
         $iterator = new RegexIterator(
             $iteratorIterator,
             '/^.+\.php$/i',
-            RecursiveRegexIterator::GET_MATCH
+            RecursiveRegexIterator::GET_MATCH,
         );
 
         $latestUpdate = 0;
@@ -158,7 +153,7 @@ final class Discovery
             $filePath = $file[0];
             $relativePath = str_replace($this->directory . '/', '', $filePath);
             $className = ltrim($this->rootNamespace . '\\' . str_replace(['/', '.php'], ['\\', ''], $relativePath), '\\');
-            if (!class_exists($className)) {
+            if ( ! class_exists($className)) {
                 continue;
             }
             $classes[] = $className;

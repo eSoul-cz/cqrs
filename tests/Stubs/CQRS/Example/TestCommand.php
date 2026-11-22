@@ -13,5 +13,6 @@ final class TestCommand implements CommandInterface
 {
     public function __construct(
         public string $property,
-    ) {}
+    ) {
+    }
 }

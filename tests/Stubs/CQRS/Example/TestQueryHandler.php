@@ -14,8 +14,7 @@ final class TestQueryHandler implements QueryHandlerInterface
     /**
      * @param  TestQuery  $query
      */
-    public function handle(QueryInterface $query): string
-    {
+    public function handle(QueryInterface $query): string {
         return 'filter: ' . ($query->filter1 ?? 'null');
     }
 }
