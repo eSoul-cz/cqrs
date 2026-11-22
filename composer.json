@@ -14,8 +14,8 @@
   },
   "require-dev": {
     "phpstan/phpstan": "^2",
-    "laravel/pint": "^1.13",
-    "phpunit/phpunit": "^13.1"
+    "phpunit/phpunit": "^13.1",
+    "esoul-cz/coding-standard": "^0.1"
   },
   "autoload": {
     "psr-4": {
@@ -28,11 +28,10 @@
     }
   },
   "scripts": {
-    "phpstan": "./vendor/bin/phpstan",
-    "phpcs": "./vendor/bin/pint --test",
-    "cs": "./vendor/bin/pint --test",
-    "phpcbf": "./vendor/bin/pint",
-    "cbf": "./vendor/bin/pint"
+    "phpstan": "phpstan analyse --memory-limit=1G --no-progress",
+    "cs": "php-cs-fixer fix --dry-run --diff",
+    "cs:fix": "php-cs-fixer fix",
+    "test": "phpunit"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
