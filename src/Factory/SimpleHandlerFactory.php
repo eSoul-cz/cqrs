@@ -16,9 +16,8 @@ class SimpleHandlerFactory implements HandlerFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function instantiate(string $handlerClass): object
-    {
-        if (!class_exists($handlerClass)) {
+    public function instantiate(string $handlerClass): object {
+        if ( ! class_exists($handlerClass)) {
             throw new RuntimeException("Handler class {$handlerClass} does not exist");
         }
 

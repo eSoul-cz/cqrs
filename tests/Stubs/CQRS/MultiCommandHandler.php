@@ -17,8 +17,7 @@ class MultiCommandHandler implements CommandHandlerInterface
     /**
      * @param  MultiCommandOne|MultiCommandTwo|MultiCommandThree  $command
      */
-    public function handle(CommandInterface $command): string
-    {
+    public function handle(CommandInterface $command): string {
         if ($command instanceof MultiCommandOne) {
             return 'one';
         }

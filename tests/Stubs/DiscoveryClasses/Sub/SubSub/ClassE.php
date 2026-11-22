@@ -10,8 +10,7 @@ use JsonSerializable;
 #[AllowDynamicProperties]
 class ClassE implements JsonSerializable
 {
-    public function jsonSerialize(): mixed
-    {
+    public function jsonSerialize(): mixed {
         return null;
     }
 }

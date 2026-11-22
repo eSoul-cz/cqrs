@@ -11,8 +11,7 @@ class ClassC implements JsonSerializable
     /**
      * {@inheritDoc}
      */
-    public function jsonSerialize(): mixed
-    {
+    public function jsonSerialize(): mixed {
         return null;
     }
 }

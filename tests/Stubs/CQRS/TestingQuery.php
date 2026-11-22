@@ -9,4 +9,6 @@ use Esoul\Cqrs\Contracts\QueryInterface;
 /**
  * @implements QueryInterface<string>
  */
-class TestingQuery implements QueryInterface {}
+class TestingQuery implements QueryInterface
+{
+}

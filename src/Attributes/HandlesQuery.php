@@ -16,7 +16,8 @@ class HandlesQuery
      * @param  class-string<QueryInterface<TQueryResult>>  $queryClass
      */
     public function __construct(
-        public string $queryClass
-    ) {}
+        public string $queryClass,
+    ) {
+    }
 
 }

@@ -24,8 +24,7 @@ use Tests\Stubs\CQRS\TestingCommandHandler;
 
 class CommandBusTest extends TestCase
 {
-    public function test_handler_discovery(): void
-    {
+    public function test_handler_discovery(): void {
         $commandBus = new CommandBus(new SimpleHandlerFactory());
 
         $handlers = $commandBus->discoverHandlers(dirname(__DIR__) . '/Stubs', '\\Tests\\Stubs', false);
@@ -34,8 +33,7 @@ class CommandBusTest extends TestCase
         $this->assertSame(TestCommandHandler::class, $handlers[TestCommand::class]);
     }
 
-    public function test_same_handler_can_be_registered_from_multiple_handles_command_attributes(): void
-    {
+    public function test_same_handler_can_be_registered_from_multiple_handles_command_attributes(): void {
         $commandBus = new CommandBus(new SimpleHandlerFactory());
         $reflection = new ReflectionClass(MultiCommandHandler::class);
 
@@ -53,8 +51,7 @@ class CommandBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_manual_register(): void
-    {
+    public function test_dispatch_manual_register(): void {
         $commandBus = new CommandBus(new SimpleHandlerFactory());
         $commandBus->registerHandler(TestingCommand::class, TestingCommandHandler::class);
 
@@ -66,8 +63,7 @@ class CommandBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_without_handler(): void
-    {
+    public function test_dispatch_without_handler(): void {
         $commandBus = new CommandBus(new SimpleHandlerFactory());
 
         $this->expectException(RuntimeException::class);
@@ -76,8 +72,7 @@ class CommandBusTest extends TestCase
     }
 
     #[Group('injection')]
-    public function test_dispatch_with_invalid_handler(): void
-    {
+    public function test_dispatch_with_invalid_handler(): void {
         $commandBus = new CommandBus(new SimpleHandlerFactory());
         /** @phpstan-ignore argument.type */
         $commandBus->registerHandler(TestingCommand::class, stdClass::class);

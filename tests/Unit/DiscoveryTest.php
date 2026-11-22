@@ -18,8 +18,7 @@ class DiscoveryTest extends TestCase
 {
     private ?string $cacheDirectory = null;
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Discovery::setCacheDirectory(null);
 
         if ($this->cacheDirectory !== null && is_dir($this->cacheDirectory)) {
@@ -32,8 +31,7 @@ class DiscoveryTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_discovery_in_dir(): void
-    {
+    public function test_discovery_in_dir(): void {
         $discovery = new Discovery(
             dirname(__DIR__) . '/Stubs/DiscoveryClasses',
             '\\Tests\\Stubs\\DiscoveryClasses',
@@ -53,8 +51,7 @@ class DiscoveryTest extends TestCase
         }
     }
 
-    public function test_discovery_in_dir_with_interface(): void
-    {
+    public function test_discovery_in_dir_with_interface(): void {
         $discovery = new Discovery(
             dirname(__DIR__) . '/Stubs/DiscoveryClasses',
             '\\Tests\\Stubs\\DiscoveryClasses',
@@ -73,8 +70,7 @@ class DiscoveryTest extends TestCase
         }
     }
 
-    public function test_discovery_in_dir_with_attribute(): void
-    {
+    public function test_discovery_in_dir_with_attribute(): void {
         $discovery = new Discovery(
             dirname(__DIR__) . '/Stubs/DiscoveryClasses',
             '\\Tests\\Stubs\\DiscoveryClasses',
@@ -93,8 +89,7 @@ class DiscoveryTest extends TestCase
         }
     }
 
-    public function test_discovery_in_dir_with_interface_and_attribute(): void
-    {
+    public function test_discovery_in_dir_with_interface_and_attribute(): void {
         $discovery = new Discovery(
             dirname(__DIR__) . '/Stubs/DiscoveryClasses',
             '\\Tests\\Stubs\\DiscoveryClasses',
@@ -113,8 +108,7 @@ class DiscoveryTest extends TestCase
         }
     }
 
-    public function test_discovery_uses_cached_classes_when_cache_is_fresh(): void
-    {
+    public function test_discovery_uses_cached_classes_when_cache_is_fresh(): void {
         $discovery = $this->createDiscovery()
             ->implements(JsonSerializable::class);
 
@@ -130,8 +124,7 @@ class DiscoveryTest extends TestCase
         $this->assertSame([ClassA::class], $discovery->get('json-serializable'));
     }
 
-    public function test_discovery_rebuilds_cache_when_source_is_newer_than_cache(): void
-    {
+    public function test_discovery_rebuilds_cache_when_source_is_newer_than_cache(): void {
         $discovery = $this->createDiscovery()
             ->implements(JsonSerializable::class);
 
@@ -158,16 +151,14 @@ class DiscoveryTest extends TestCase
         }
     }
 
-    private function createDiscovery(): Discovery
-    {
+    private function createDiscovery(): Discovery {
         return new Discovery(
             dirname(__DIR__) . '/Stubs/DiscoveryClasses',
             '\\Tests\\Stubs\\DiscoveryClasses',
         );
     }
 
-    private function configureCacheDirectory(): string
-    {
+    private function configureCacheDirectory(): string {
         $this->cacheDirectory = sys_get_temp_dir() . '/discovery-test-' . bin2hex(random_bytes(8));
         Discovery::setCacheDirectory($this->cacheDirectory);
 
