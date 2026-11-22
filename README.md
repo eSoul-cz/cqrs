@@ -319,3 +319,16 @@ The buses throw `RuntimeException` when:
 - Relative discovery directories are resolved from the package root. In applications, prefer absolute paths for clarity.
 - Discovery only finds classes already available to the autoloader.
 - Handler registration is last-write-wins. Registering the same command or query again replaces the previous handler mapping.
+
+## Development
+
+Requires PHP 8.5 or newer; CI also runs the test suite on PHP 8.6.
+
+| Command | Description |
+|---------|-------------|
+| `composer phpstan` | PHPStan static analysis (level 10) |
+| `composer cs` | Check code style (`esoul-cz/coding-standard`, dry run) |
+| `composer cs:fix` | Fix code style |
+| `composer test` | Run PHPUnit |
+
+The Jenkins pipeline (`phpPackagePipeline`) validates `composer.json`, runs PHPStan, the code-style check and PHPUnit on PHP 8.5, runs PHPUnit again on PHP 8.6, audits dependencies, and triggers the Satis rebuild after a successful build of `master`.
